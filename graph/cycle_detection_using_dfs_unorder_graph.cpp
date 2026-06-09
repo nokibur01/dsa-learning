@@ -35,7 +35,7 @@ class graph{
             g[b].pb(a);
         }
     }
-
+// my implementation 🙂🙂
     void dfsCycleDetectionHelper(int n,int p,vector<bool> &visited,vector<int> &parent,bool &flag){
         if(flag){
             return ;
@@ -49,7 +49,7 @@ class graph{
             }
         }
     }
-
+// implementation by watching video ** too much optimized 🙂🙂🙂🙂🙂🙂 **
     bool dfsCycleDetectionHelper(int n,int p,vector<bool> &visited){
         visited[n]=1;
         for(auto val:g[n]){
@@ -63,10 +63,14 @@ class graph{
         return false;
     }
 
-    void dfsCycleDetection(int n,int p){
+    void dfsCycleDetection(){
         vector<bool>visited(v,false);
-        if(dfsCycleDetectionHelper(n,p,visited)) cout<<"Cycle detected"<<endl;
-        else cout<<"Cycle not detected"<<endl;
+        for(int i=0;i<v;i++){
+            if(visited[i]==false){
+                if(dfsCycleDetectionHelper(i,-1,visited)) cout<<"Cycle detected"<<endl;
+                else cout<<"Cycle not detected"<<endl;
+            }
+        }
     }
 };
 
@@ -76,7 +80,7 @@ int main() {
     // cin.tie(NULL);
 
     graph g1;
-    g1.dfsCycleDetection(0,-1);
+    g1.dfsCycleDetection();
 
     return 0;
 }
