@@ -44,18 +44,28 @@ class graph{
         visited[n]=1;
         for(auto val:g[n]){
             if(!visited[val]) dfsCycleDetectionHelper(val,n,visited,parent,flag);
-            else if(visited[val] && parent[n]!=val){
+            else if(parent[n]!=val){
                 flag = true;
             }
         }
     }
 
+    bool dfsCycleDetectionHelper(int n,int p,vector<bool> &visited){
+        visited[n]=1;
+        for(auto val:g[n]){
+            if(!visited[val]) {
+                if(dfsCycleDetectionHelper(val,n,visited)) return true;
+            }
+            else if(val!=p){
+                return true;
+            }
+        }
+        return false;
+    }
+
     void dfsCycleDetection(int n,int p){
         vector<bool>visited(v,false);
-        vector<int>parents(v,0);
-        bool flag = false;
-        dfsCycleDetectionHelper(n,p,visited,parents,flag);
-        if(flag) cout<<"Cycle detected"<<endl;
+        if(dfsCycleDetectionHelper(n,p,visited)) cout<<"Cycle detected"<<endl;
         else cout<<"Cycle not detected"<<endl;
     }
 };
